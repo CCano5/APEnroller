@@ -22,19 +22,25 @@ Function Test-WindowsEditionforAutopilot {
     }        
 }
 
-Function Connect-Tennant {
-    [cmdletbinding()]
-    Param (
-    )
-    Process{
-        $module = Import-Module WindowsAutopilotIntune -PassThru -ErrorAction Ignore
-        if (-not $module) {
-            Write-Host "Installing module WindowsAutopilotIntune"
-            Install-Module WindowsAutopilotIntune -Force
-        }
-        Import-Module WindowsAutopilotIntune -Scope Global
-        Connect-MSGraph
-	Connect-MgGraph
-        Connect-AzureAD
-    }
+Function Connect-Tennant {  
+  [cmdletbinding()]  
+  Param (  
+  )  
+  Process{  
+  $module = Import-Module WindowsAutopilotIntune -PassThru -ErrorAction Ignore  
+  if (-not $module) {  
+  Write-Host "Installing module WindowsAutopilotIntune"  
+  Install-Module WindowsAutopilotIntune -Force  
+  }  
+  Import-Module WindowsAutopilotIntune -Scope Global  
+  Connect-MSGraph
+  Connect-MgGraph # The new line  
+
+  try {
+    Connect-AzureAD -ErrorAction Stop
+  } catch {
+    Write-Error "Failed to connect to AzureAD: $_"
+    exit
+  }
+  }  
 }
