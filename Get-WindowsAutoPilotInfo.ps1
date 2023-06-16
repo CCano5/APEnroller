@@ -169,7 +169,7 @@ if ($AppId -ne "") {
   $graph = Connect-MSGraph
   Write-Host "Connected to Intune tenant $($graph.TenantId)"
   if ($AddToGroup) {
-    $aadId = Connect-AzureAD -accountid $graph.UPN
+    $aadId = Connect-AzureAD
     Write-Host "Connected to Azure AD tenant $($aadId.TenantId)"
   }
 }
