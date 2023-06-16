@@ -34,6 +34,6 @@ Function Connect-Tennant {
         }
         Import-Module WindowsAutopilotIntune -Scope Global
         $graph = Connect-MSGraph 
-        Connect-AzureAD $graph.UPN
+        Connect-AzureAD
     }
 }
