@@ -1,5 +1,21 @@
 Start-Transcript -Path $env:TEMP\APEnroller.txt
 
+# Ensure necessary modules are installed
+if (-not (Get-Module -ListAvailable -Name WindowsAutopilotIntune)) {
+    Write-Host "Installing module WindowsAutopilotIntune"
+    Install-Module -Name WindowsAutopilotIntune -Force
+}
+
+if (-not (Get-Module -ListAvailable -Name MSGraph)) {
+    Write-Host "Installing module MSGraph"
+    Install-Module -Name MSGraph -Force
+}
+
+if (-not (Get-Module -ListAvailable -Name AzureAD)) {
+    Write-Host "Installing module AzureAD"
+    Install-Module -Name AzureAD -Force
+}
+
 #Sourcing functions from Functions-AutopilotValidation.ps1
 Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/CCano5/APEnroller/master/Functions-AutopilotValidation.ps1 -UseBasicParsing)
 Test-WindowsEditionforAutopilot                             #Will Upgrade Home/Core Edition to Education to support Autopilot
@@ -26,4 +42,3 @@ Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/CCano5/APE
 Get-WindowsAutoPilotInfo -Online -Assign -AddToGroup ($Group.DisplayName)
 Stop-Transcript
 Start-Process "C:\windows\System32\Sysprep\sysprep.exe" -argumentlist "/oobe /reboot"
-
