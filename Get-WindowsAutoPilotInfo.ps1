@@ -172,7 +172,7 @@ Begin
             Write-Host "Connected to Intune tenant $($graph.TenantId)"
             if ($AddToGroup)
             {
-                $aadId = Connect-AzureAD -AccountId $graph.UPN
+                $aadId = Connect-AzureAD $graph.UPN
                 Write-Host "Connected to Azure AD tenant $($aadId.TenantId)"
             }
         }
