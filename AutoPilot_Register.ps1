@@ -1,7 +1,7 @@
 Start-Transcript -Path $env:TEMP\APEnroller.txt
 
 #Sourcing functions from Functions-AutopilotValidation.ps1
-Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/JaredSeavyHodge/APEnroller/master/Functions-AutopilotValidation.ps1 -UseBasicParsing)
+Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/CCano5/APEnroller/master/Functions-AutopilotValidation.ps1 -UseBasicParsing)
 Test-WindowsEditionforAutopilot                             #Will Upgrade Home/Core Edition to Education to support Autopilot
 Connect-Tennant                                             #Connects to Azure and MS-Graph - Imports Dependency Modules if Necessary
 
@@ -21,7 +21,7 @@ $Group = Get-AzureADGroup -SearchString "ENDPOINT Devices" -All $true | Out-Grid
 #https://www.powershellgallery.com/packages/Get-WindowsAutoPilotInfo
 #Author of Get-WindowsAutoPilotInfo:  Michael Niehaus
 #Install-Script -Name Get-WindowsAutoPilotInfo -Force
-Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/JaredSeavyHodge/APEnroller/master/Get-WindowsAutoPilotInfo.ps1 -usebasicparsing)
+Invoke-Expression(Invoke-WebRequest https://raw.githubusercontent.com/CCano5/APEnroller/master/Get-WindowsAutoPilotInfo.ps1 -usebasicparsing)
 
 Get-WindowsAutoPilotInfo -Online -Assign -AddToGroup ($Group.DisplayName)
 Stop-Transcript
