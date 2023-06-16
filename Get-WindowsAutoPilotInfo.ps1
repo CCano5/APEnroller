@@ -161,21 +161,18 @@ Begin
             }
         }
 
-        # Connect
-        if ($AppId -ne "")
-        {
-            $graph = Connect-MSGraphApp -Tenant $TenantId -AppId $AppId -AppSecret $AppSecret
-            Write-Host "Connected to Intune tenant $TenantId using app-based authentication (Azure AD authentication not supported)"
-        }
-        else {
-            $graph = Connect-MSGraph
-            Write-Host "Connected to Intune tenant $($graph.TenantId)"
-            if ($AddToGroup)
-            {
-                $aadId = Connect-AzureAD -accountid $graph.UPN
-                Write-Host "Connected to Azure AD tenant $($aadId.TenantId)"
-            }
-        }
+       # Connect
+if ($AppId -ne "") {
+  $graph = Connect-MSGraphApp -Tenant $TenantId -AppId $AppId -AppSecret $AppSecret
+  Write-Host "Connected to Intune tenant $TenantId using app-based authentication (Azure AD authentication not supported)"
+} else {
+  $graph = Connect-MSGraph
+  Write-Host "Connected to Intune tenant $($graph.TenantId)"
+  if ($AddToGroup) {
+    $aadId = Connect-AzureAD -accountid $graph.UPN
+    Write-Host "Connected to Azure AD tenant $($aadId.TenantId)"
+  }
+}
 
         # Force the output to a file
         if ($OutputFile -eq "")
