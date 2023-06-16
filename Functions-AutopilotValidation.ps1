@@ -33,7 +33,8 @@ Function Connect-Tennant {
             Install-Module WindowsAutopilotIntune -Force
         }
         Import-Module WindowsAutopilotIntune -Scope Global
-        Connect-MSGraph 
+        Connect-MSGraph
+	Connect-MgGraph
         Connect-AzureAD
     }
 }
